@@ -39,16 +39,7 @@
       position: relative;
       overflow: hidden;
     }
-    .header::before {
-      content: '🕉';
-      position: absolute;
-      font-size: 120px;
-      opacity: 0.06;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .header-om { font-size: 28px; margin-bottom: 8px; letter-spacing: 4px; }
+    .header-om { font-size: 18px; margin-bottom: 8px; letter-spacing: 2px; color: var(--saffron-mid); font-weight: 600; }
     .header h1 {
       font-family: 'Tiro Devanagari Sanskrit', serif;
       font-size: 20px;
@@ -309,7 +300,7 @@
 <body>
 
 <div class="header">
-  <div class="header-om">🕉</div>
+  <div class="header-om">॥ શ્રી શંખેશ્વર પાર્શ્વનાથાય નમઃ ॥</div>
   <h1>S K Shah Jain Shwetambar Murtipujak Sangh</h1>
   <div class="header-divider"></div>
   <h2>Harinagar Sangh — Member Registration 2026</h2>
@@ -318,7 +309,8 @@
 <div class="form-wrap">
 
   <div class="instruction">
-    Please fill details of <strong>all family members</strong>. You can select <strong>maximum 2 mobile numbers</strong> across all members to receive Sangh messages and donation receipts. ✅
+    Please fill details of <strong>all family members</strong>. You can select <strong>maximum 2 mobile numbers</strong> across all members to receive Sangh messages and donation receipts. ✅<br><br>
+    📞 <strong>Need help filling this form?</strong> Contact: <strong>9327243611</strong>
   </div>
 
   <div id="form-area">
@@ -396,7 +388,7 @@
     card.id = 'member-' + idx;
     card.innerHTML = `
       <div class="member-header">
-        <div class="member-label">Member ${idx}</div>
+        <div class="member-label">Member ${idx}${idx === 1 ? ' &nbsp;<span style="font-size:11px;font-weight:400;color:var(--saffron);background:var(--saffron-light);padding:2px 8px;border-radius:20px;">Head of Family</span>' : ''}</div>
         ${idx > 1 ? `<button class="remove-btn" onclick="removeMember(${idx})" title="Remove">✕</button>` : ''}
       </div>
       <div class="member-grid">
