@@ -319,7 +319,7 @@
       <div class="section-title">Head of Family</div>
       <div class="field">
         <label>Full Name <span class="req">*</span></label>
-        <input type="text" id="head-name" placeholder="Enter head of family name" />
+        <input type="text" id="head-name" placeholder="Enter head of family name" oninput="syncHeadToMember1()" />
         <div class="error-msg" id="err-head">Please enter head of family name.</div>
       </div>
     </div>
@@ -359,7 +359,7 @@
 </div>
 
 <script>
-  const GAS_URL = "YOUR_GAS_WEB_APP_URL_HERE";
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbz6el3FzboZEpviXIcDldfGeuWP3Tk3F31keGC9s5iuETR7Yis6tY_rQk02k7NEihfU/exec";
   const MAX_MEMBERS = 8;
   const MAX_CHECKED = 2;
 
@@ -493,7 +493,7 @@
     return { headName, members, selectedNumbers };
   }
 
-  async function submitForm() {
+  function submitForm() {
     if (!validateForm()) return;
     const btn = document.getElementById('submit-btn');
     const spinner = document.getElementById('spinner');
@@ -501,22 +501,42 @@
     btn.disabled = true;
     spinner.style.display = 'block';
     label.textContent = 'Submitting...';
+
     const data = collectData();
-    try {
-      await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+
+    // Hidden iframe + form POST — most reliable method for GAS
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden_iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = GAS_URL;
+    form.target = 'hidden_iframe';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+
+    // Show success after 3 seconds
+    setTimeout(() => {
       document.getElementById('form-area').style.display = 'none';
       document.getElementById('success-screen').style.display = 'block';
-    } catch (err) {
-      alert('Submission failed. Please check your internet connection and try again.');
-      btn.disabled = false;
-      spinner.style.display = 'none';
-      label.textContent = 'Submit Registration 🙏';
-    }
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+    }, 3000);
+  }
+
+  function syncHeadToMember1() {
+    const headVal = document.getElementById('head-name').value;
+    const m1name = document.getElementById('m1-name');
+    if (m1name) m1name.value = headVal;
   }
 
   window.onload = () => addMember();
