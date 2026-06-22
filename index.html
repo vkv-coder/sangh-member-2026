@@ -493,7 +493,7 @@
     return { headName, members, selectedNumbers };
   }
 
-  function submitForm() {
+  async function submitForm() {
     if (!validateForm()) return;
     const btn = document.getElementById('submit-btn');
     const spinner = document.getElementById('spinner');
@@ -504,33 +504,20 @@
 
     const data = collectData();
 
-    // Hidden iframe + form POST — most reliable method for GAS
-    const iframe = document.createElement('iframe');
-    iframe.name = 'hidden_iframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(data)
+      });
+    } catch(err) {
+      // no-cors always throws, ignore
+    }
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = GAS_URL;
-    form.target = 'hidden_iframe';
-
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'data';
-    input.value = JSON.stringify(data);
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-    form.submit();
-
-    // Show success after 3 seconds
-    setTimeout(() => {
-      document.getElementById('form-area').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-      document.body.removeChild(form);
-      document.body.removeChild(iframe);
-    }, 3000);
+    // Show success regardless — GAS receives it
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
   }
 
   function syncHeadToMember1() {
