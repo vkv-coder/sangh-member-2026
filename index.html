@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <title>Harinagar Sangh Member 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --saffron: #D4690A;
+      --saffron-light: #FFF3E5;
+      --saffron-mid: #F5A94B;
+      --maroon: #7B1C1C;
+      --cream: #FFFDF8;
+      --text: #1A1A1A;
+      --muted: #6B6B6B;
+      --border: #E0D5C5;
+      --green: #2E7D32;
+      --red: #C62828;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--maroon) 0%, #4A0E0E 100%);
+      color: white;
+      padding: 24px 20px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '🕉';
+      position: absolute;
+      font-size: 120px;
+      opacity: 0.06;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .header-om { font-size: 28px; margin-bottom: 8px; letter-spacing: 4px; }
+    .header h1 {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--saffron-mid);
+      margin-bottom: 4px;
+    }
+    .header h2 {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .header-divider {
+      width: 60px; height: 2px;
+      background: var(--saffron-mid);
+      margin: 12px auto 10px;
+      border-radius: 2px;
+    }
+
+    .form-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    .instruction {
+      background: var(--saffron-light);
+      border-left: 4px solid var(--saffron);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--maroon);
+      line-height: 1.6;
+    }
+    .instruction strong { color: var(--saffron); }
+
+    .section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--maroon);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .field { margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    label .req { color: var(--red); margin-left: 2px; }
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #FAFAFA;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--saffron);
+      background: white;
+    }
+
+    .member-card {
+      background: #FAFAFA;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .member-card.checked {
+      border-color: var(--saffron);
+      background: var(--saffron-light);
+    }
+    .member-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .member-label { font-size: 13px; font-weight: 600; color: var(--maroon); }
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--red);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0 4px;
+      line-height: 1;
+    }
+    .member-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .member-grid .full { grid-column: 1 / -1; }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      background: white;
+      border: 1.5px dashed var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 18px; height: 18px;
+      margin-top: 1px;
+      accent-color: var(--saffron);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .checkbox-row label {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 400;
+    }
+    .checkbox-row label span {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .selected-count {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      margin-bottom: 8px;
+    }
+    .selected-count.maxed { color: var(--saffron); font-weight: 600; }
+
+    .add-btn {
+      width: 100%;
+      padding: 12px;
+      background: white;
+      border: 2px dashed var(--saffron-mid);
+      border-radius: var(--radius);
+      color: var(--saffron);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .add-btn:hover { background: var(--saffron-light); }
+    .add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--maroon), #4A0E0E);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #success-screen {
+      display: none;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .success-icon { font-size: 70px; margin-bottom: 20px; }
+    .success-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .success-msg {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .success-note {
+      margin-top: 24px;
+      background: var(--saffron-light);
+      border-left: 4px solid var(--saffron);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--maroon);
+      text-align: left;
+      line-height: 1.7;
+    }
+
+    .error-msg {
+      color: var(--red);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 480px) {
+      .member-grid { grid-template-columns: 1fr; }
+      .member-grid .full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-om">🕉</div>
+  <h1>S K Shah Jain Shwetambar Murtipujak Sangh</h1>
+  <div class="header-divider"></div>
+  <h2>Harinagar Sangh — Member Registration 2026</h2>
+</div>
+
+<div class="form-wrap">
+
+  <div class="instruction">
+    Please fill details of <strong>all family members</strong>. You can select <strong>maximum 2 mobile numbers</strong> across all members to receive Sangh messages and donation receipts. ✅
+  </div>
+
+  <div id="form-area">
+
+    <div class="section">
+      <div class="section-title">Head of Family</div>
+      <div class="field">
+        <label>Full Name <span class="req">*</span></label>
+        <input type="text" id="head-name" placeholder="Enter head of family name" />
+        <div class="error-msg" id="err-head">Please enter head of family name.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Family Members</div>
+      <div class="selected-count" id="selected-count">0 of 2 numbers selected for messages</div>
+      <div id="members-container"></div>
+      <button class="add-btn" id="add-btn" onclick="addMember()">
+        ＋ Add Family Member
+      </button>
+      <div class="error-msg" id="err-members" style="display:block; margin-top:8px;"></div>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+      <div class="spinner" id="spinner"></div>
+      <span id="submit-label">Submit Registration 🙏</span>
+    </button>
+
+  </div>
+
+  <div id="success-screen">
+    <div class="success-icon">🙏</div>
+    <div class="success-title">Registration Submitted!</div>
+    <div class="success-msg">
+      Thank you for registering with<br>
+      <strong>S K Shah Jain Shwetambar Murtipujak Sangh</strong>.<br><br>
+      Your details have been recorded successfully.
+    </div>
+    <div class="success-note">
+      📋 Your <strong>Family Number</strong> will be allotted shortly.<br>
+      You will be informed on your registered mobile number once allotted.<br><br>
+      🙏 <em>Jai Jinendra</em>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const GAS_URL = "YOUR_GAS_WEB_APP_URL_HERE";
+  const MAX_MEMBERS = 8;
+  const MAX_CHECKED = 2;
+
+  let memberCount = 0;
+  let checkedCount = 0;
+
+  function updateSelectedCount() {
+    checkedCount = document.querySelectorAll('.member-checkbox:checked').length;
+    const el = document.getElementById('selected-count');
+    el.textContent = checkedCount + ' of 2 numbers selected for messages';
+    el.className = 'selected-count' + (checkedCount >= MAX_CHECKED ? ' maxed' : '');
+    document.querySelectorAll('.member-checkbox').forEach(cb => {
+      if (!cb.checked) cb.disabled = checkedCount >= MAX_CHECKED;
+      const card = cb.closest('.member-card');
+      if (card) card.classList.toggle('checked', cb.checked);
+    });
+  }
+
+  function addMember() {
+    if (memberCount >= MAX_MEMBERS) return;
+    memberCount++;
+    const idx = memberCount;
+    const container = document.getElementById('members-container');
+    const card = document.createElement('div');
+    card.className = 'member-card';
+    card.id = 'member-' + idx;
+    card.innerHTML = `
+      <div class="member-header">
+        <div class="member-label">Member ${idx}</div>
+        ${idx > 1 ? `<button class="remove-btn" onclick="removeMember(${idx})" title="Remove">✕</button>` : ''}
+      </div>
+      <div class="member-grid">
+        <div class="field full">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" id="m${idx}-name" placeholder="Member name" />
+        </div>
+        <div class="field">
+          <label>Gender</label>
+          <select id="m${idx}-gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Age</label>
+          <input type="number" id="m${idx}-age" placeholder="Age" min="0" max="120" />
+        </div>
+        <div class="field full">
+          <label>Mobile Number</label>
+          <input type="tel" id="m${idx}-mobile" placeholder="10-digit mobile number" maxlength="10" />
+        </div>
+      </div>
+      <div class="checkbox-row" onclick="toggleCheck(${idx})">
+        <input type="checkbox" class="member-checkbox" id="m${idx}-check"
+          onchange="updateSelectedCount()" onclick="event.stopPropagation()" />
+        <label for="m${idx}-check">
+          ✅ Send Sangh messages & receipts to this number
+          <span>Select max 2 numbers across all members</span>
+        </label>
+      </div>
+    `;
+    container.appendChild(card);
+    if (memberCount >= MAX_MEMBERS) document.getElementById('add-btn').disabled = true;
+    updateSelectedCount();
+  }
+
+  function toggleCheck(idx) {
+    const cb = document.getElementById('m' + idx + '-check');
+    if (!cb) return;
+    if (!cb.checked && checkedCount >= MAX_CHECKED) return;
+    cb.checked = !cb.checked;
+    updateSelectedCount();
+  }
+
+  function removeMember(idx) {
+    const card = document.getElementById('member-' + idx);
+    if (card) card.remove();
+    document.getElementById('add-btn').disabled = false;
+    updateSelectedCount();
+  }
+
+  function validateForm() {
+    let valid = true;
+    const headName = document.getElementById('head-name').value.trim();
+    const errHead = document.getElementById('err-head');
+    if (!headName) { errHead.style.display = 'block'; valid = false; }
+    else { errHead.style.display = 'none'; }
+
+    const cards = document.querySelectorAll('.member-card');
+    const errMembers = document.getElementById('err-members');
+    if (cards.length === 0) {
+      errMembers.textContent = 'Please add at least one family member.';
+      valid = false;
+    } else {
+      errMembers.textContent = '';
+      let memberValid = true;
+      cards.forEach(card => {
+        const idx = card.id.replace('member-', '');
+        const nameField = document.getElementById('m' + idx + '-name');
+        if (nameField && !nameField.value.trim()) {
+          nameField.style.borderColor = '#C62828';
+          memberValid = false;
+        } else if (nameField) {
+          nameField.style.borderColor = '';
+        }
+      });
+      if (!memberValid) {
+        errMembers.textContent = 'Please enter name for all added members.';
+        valid = false;
+      }
+    }
+    return valid;
+  }
+
+  function collectData() {
+    const headName = document.getElementById('head-name').value.trim();
+    const members = [];
+    const selectedNumbers = [];
+    document.querySelectorAll('.member-card').forEach(card => {
+      const idx = card.id.replace('member-', '');
+      const name   = (document.getElementById('m' + idx + '-name')?.value || '').trim();
+      const gender = document.getElementById('m' + idx + '-gender')?.value || '';
+      const age    = document.getElementById('m' + idx + '-age')?.value || '';
+      const mobile = (document.getElementById('m' + idx + '-mobile')?.value || '').trim();
+      const selected = document.getElementById('m' + idx + '-check')?.checked || false;
+      members.push({ name, gender, age, mobile, selected });
+      if (selected && mobile) selectedNumbers.push(mobile);
+    });
+    return { headName, members, selectedNumbers };
+  }
+
+  async function submitForm() {
+    if (!validateForm()) return;
+    const btn = document.getElementById('submit-btn');
+    const spinner = document.getElementById('spinner');
+    const label = document.getElementById('submit-label');
+    btn.disabled = true;
+    spinner.style.display = 'block';
+    label.textContent = 'Submitting...';
+    const data = collectData();
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      document.getElementById('form-area').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    } catch (err) {
+      alert('Submission failed. Please check your internet connection and try again.');
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      label.textContent = 'Submit Registration 🙏';
+    }
+  }
+
+  window.onload = () => addMember();
+</script>
+</body>
+</html>
