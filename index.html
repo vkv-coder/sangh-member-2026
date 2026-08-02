@@ -408,11 +408,11 @@
         </div>
         <div class="field">
           <label>Date of Birth</label>
-          <input type="date" id="m${idx}-dob" max="${new Date().toISOString().split('T')[0]}" />
+          <input type="date" id="m${idx}-dob" max="${new Date().toISOString().split('T')[0]}" oninput="syncAgeFromDob(${idx})" />
         </div>
         <div class="field">
           <label>Age</label>
-          <input type="number" id="m${idx}-age" placeholder="Age" min="0" max="120" />
+          <input type="number" id="m${idx}-age" placeholder="Age (auto if DOB filled)" min="0" max="120" />
         </div>
         <div class="field full">
           <label>Mobile Number</label>
@@ -446,6 +446,32 @@
     if (card) card.remove();
     document.getElementById('add-btn').disabled = false;
     updateSelectedCount();
+  }
+
+  function calcAgeFromDob(dobStr) {
+    const dob = new Date(dobStr);
+    if (isNaN(dob.getTime())) return null;
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+    return age >= 0 ? age : null;
+  }
+
+  function syncAgeFromDob(idx) {
+    const dobEl = document.getElementById('m' + idx + '-dob');
+    const ageEl = document.getElementById('m' + idx + '-age');
+    if (!dobEl || !ageEl) return;
+    if (dobEl.value) {
+      const age = calcAgeFromDob(dobEl.value);
+      ageEl.value = age !== null ? age : '';
+      ageEl.readOnly = true;
+      ageEl.style.background = '#F0F0F0';
+    } else {
+      ageEl.value = '';
+      ageEl.readOnly = false;
+      ageEl.style.background = '';
+    }
   }
 
   function validateForm() {
