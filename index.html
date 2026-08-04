@@ -537,6 +537,14 @@
     const data = collectData();
 
     try {
+      // mode:'no-cors' means the response is opaque - we can never read the
+      // actual status/body, so a request that DID reach the server can't be
+      // told apart from one that succeeded there. That's a structural limit
+      // of this no-cors approach, not fixable from here without changing the
+      // GAS backend (not in this repo). What we CAN detect: fetch() throwing
+      // means the request never left the browser at all (offline, DNS
+      // failure, etc.) - that case was previously swallowed and shown as
+      // success too, which is fixed below.
       await fetch(GAS_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -544,10 +552,13 @@
         body: JSON.stringify(data)
       });
     } catch(err) {
-      // no-cors always throws, ignore
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      label.textContent = 'Submit';
+      alert('Could not submit — check your internet connection and try again.');
+      return;
     }
 
-    // Show success regardless — GAS receives it
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
   }
